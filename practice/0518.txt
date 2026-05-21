@@ -1,0 +1,24 @@
+# Hi, this is my first day in building VIGIL -- starting with foundational work in the ~*terminal*~
+# This is my second time writing directly into this text file using vim because I didn't save before quitting
+# I am feeling very challenged and my brain is tired but it seems like I'm doing it
+# Thank God for this "The Missing Semester of Your CS Education" online course
+# Also grateful to Mike Shah who let me audit his CPSC 3230 course last semester
+# I'll come back to add in my Daily Exit Ticket after saving
+
+# (1) One thing I learned:
+cat < input-i-want-to-copy >> text-i-am-appending
+also lots of installations, like tldr
+
+# (2) One thing I committed:
+creating lots of directories! which i think of as folders
+
+# (3) One thing I can explain:
+mv can both rename a file and also move a file to a new directory
+
+# (4) One thing still fuzzy:
+mkdir -p and why you need it to show that you are also creating the parent folders but i guess that's just what it is?
+
+# (5) Confidence exam outcome:
+SUCCESSFULLY DONE!
+
+DAY ONE IS DONE! I'M OUT OF HERE!!

@@ -1,0 +1,12 @@
+ls: /nonexistent: No such file or directory
+/tmp:
+claude-501
+claude-settings-44136fa355b3678a.json
+com.adobe.Acrobat.tmp.sbx
+com.apple.launchd.Dqy1vjXQSt
+powerlog
+zeb_def_ipc_1211
+zeb_def_ipc_1221
+zeb_def_ipc_1647
+zeb_def_ipc_1901
+zeb_def_ipc_571
