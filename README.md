@@ -1,1 +1,2 @@
-# VIGIL Summer
+# VIGIL Summer 2026 MVP
+

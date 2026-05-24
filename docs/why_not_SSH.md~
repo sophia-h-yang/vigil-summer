@@ -1,0 +1,65 @@
+# Why the VIGIL workflow // shortcomings of SSH assumptions for remote tele-ops
+
+  SSH requires the robot to accept connections from the internet. 
+  We can't control every customer's firewall, so the robot calls us instead,
+  and we broker everything through a single, authenticated channel that we control.
+
+## SSH: the inbound port problem
+ 
+  SSH assumes you can reach the device. For a robot on a customer's factory floor or a consumer's home network, that means:
+  - The customer has to open a hole in their firewall to port 22
+  - Most enterprise IT departments refuse this on principle
+  - Robots on cellular (4G/5G) sit behind carrier-grade NAT — they don't have a routable IP at all, full stop
+  - Even if the customer agrees, their IP changes, their router reboots, their network guy leaves
+  
+  You can't build a global fleet operations tool on "please ask each customer to configure their firewall for us."
+
+## SSH: credential chaos at scale
+
+  One robot: manageable. A hundred robots: you have a hundred SSH keys to provision, store, rotate, and revoke. When a support
+  engineer leaves the company, you're manually cycling keys on every device they ever touched. There's no central "this person is
+   no longer authorized" — you have to find every robot they had access to and remove them individually.
+  
+  SSH: no access control, no audit
+
+  SSH is binary — you're either in with full shell access, or you're not. There's no "this engineer can restart the navigation
+  service but can't touch the data directory." There's no built-in record of which commands ran. Shell history can be disabled,
+  logs can be deleted. If a customer asks "what did your engineer do on our robot last Tuesday," the honest answer is "we don't
+  know for certain."
+
+  ---
+##  VPN: flat network problem
+  
+  A VPN puts every connected device on the same network segment. That means a compromised robot, a compromised laptop, or a rogue
+   employee can probe every other device on the network. You've traded "hard to get in" for "once you're in, everything is
+  exposed."
+
+  VPN: customers don't want your network on theirs
+
+  Getting a VPN to work requires either running your VPN server inside the customer's network (most enterprise security teams
+  won't allow a vendor to join their internal network) or routing the customer's traffic through your infrastructure (they won't
+  trust that either). This is a procurement and legal blocker before it's even a technical one.
+  
+  VPN: still has the NAT problem
+
+  Traditional VPNs still require an inbound connection to establish the tunnel. Same cellular/NAT problem as SSH. Solutions exist
+   (WireGuard, Tailscale) but they're complex to operate at scale across thousands of customer environments you don't control.
+
+  ---
+##  Why agent-calls-home solves all of this
+  
+  The robot only makes outbound TCP connections — to your control plane at a fixed address. Outbound TCP on port 443 is allowed
+  on almost every network on earth, including cellular, because it looks like HTTPS traffic. The robot doesn't need an inbound
+  port. The customer doesn't need to configure anything.
+
+  Everything else follows from that:
+  - Credentials are managed centrally on the control plane — revoke a device or an operator in one place, it takes effect
+  everywhere instantly
+  - The broker enforces permissions before anything reaches the robot — the robot doesn't need to know who the operator is or
+  what they're allowed to do
+  - Every command goes through the broker, so every command can be logged, and the log is on infrastructure you control, not on a
+   device someone could tamper with
+   
+  The pattern isn't new — it's how AWS Systems Manager replaces SSH for cloud servers, how modern IoT platforms work, how
+  Cloudflare Tunnel works. VIGIL is that pattern for deployed robots, built in Rust, with a tamper-evident audit trail.
+
