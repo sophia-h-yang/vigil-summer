@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-set -x
+# set -x
 
 if [ -d "$1" ]; then
 	echo "It's a directory!"

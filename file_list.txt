@@ -1,0 +1,13 @@
+total 40
+drwxr-xr-x  12 sophiahyang  staff    384 May 27 14:24 .
+drwxr-x---+ 58 sophiahyang  staff   1856 May 27 14:23 ..
+drwxr-xr-x  16 sophiahyang  staff    512 May 26 09:42 .git
+-rw-r--r--   1 sophiahyang  staff     19 May 20 20:33 .gitignore
+-rw-r--r--   1 sophiahyang  staff  12288 May 22 11:37 .README.md.swp
+drwxr-xr-x   2 sophiahyang  staff     64 May 18 14:27 docker-practice
+drwxr-xr-x   6 sophiahyang  staff    192 May 27 08:07 docs
+-rw-r--r--   1 sophiahyang  staff      0 May 27 14:24 file_list.txt
+drwxr-xr-x  12 sophiahyang  staff    384 May 26 12:03 practice
+-rw-r--r--   1 sophiahyang  staff     25 May 21 19:55 README.md
+drwxr-xr-x   2 sophiahyang  staff     64 May 18 14:27 rust-practice
+drwxr-xr-x   2 sophiahyang  staff     64 May 18 14:27 scripts
